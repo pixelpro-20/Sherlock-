@@ -14,7 +14,8 @@ import re
 import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from time import monotonic
-
+from timeoutadapter import TimeoutHTTPAdapter
+from random import randint
 import requests
 
 from requests_futures.sessions import FuturesSession
@@ -23,6 +24,9 @@ from result import QueryStatus
 from result import QueryResult
 from notify import QueryNotifyPrint
 from sites  import SitesInformation
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
+
 
 module_name = "Sherlock: Find Usernames Across Social Networks"
 __version__ = "0.13.0"
@@ -171,7 +175,15 @@ def sherlock(username, site_data, query_notify,
         #Normal requests
         underlying_session = requests.session()
         underlying_request = requests.Request()
+    retry_strategy = Retry(
+        total=3,
+        backoff_factor=5,
+        status_forcelist=[400, 403, 429, 500, 502, 503, 504],
+        method_whitelist=["HEAD", "GET", "POST", "OPTIONS"]
+    )
 
+    adapter = TimeoutHTTPAdapter(max_retries=retry_strategy, timeout=timeout)
+    
     #Limit number of workers to 20.
     #This is probably vastly overkill.
     if len(site_data) >= 20:
@@ -182,7 +194,8 @@ def sherlock(username, site_data, query_notify,
     #Create multi-threaded session for all requests.
     session = SherlockFuturesSession(max_workers=max_workers,
                                      session=underlying_session)
-
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
 
     # Results from analysis of all sites
     results_total = {}
@@ -199,7 +212,7 @@ def sherlock(username, site_data, query_notify,
         # A user agent is needed because some sites don't return the correct
         # information since they think that we are bots (Which we actually are...)
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.{1}; rv:{0}.0) Gecko/20100101 Firefox/{0}.0'.format(randint(55,78), randint(12,16)),
         }
 
         if "headers" in net_info:
