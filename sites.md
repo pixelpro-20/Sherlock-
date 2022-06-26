@@ -1,4 +1,4 @@
-## List Of Supported Sites (369 Sites In Total!)
+## List Of Supported Sites (370 Sites In Total!)
 1. [2Dimensions](https://2Dimensions.com/)
 1. [3dnews](http://forum.3dnews.ru/)
 1. [7Cups](https://www.7cups.com/)
@@ -68,6 +68,7 @@
 1. [Cryptomator Forum](https://community.cryptomator.org/)
 1. [DEV Community](https://dev.to/)
 1. [DailyMotion](https://www.dailymotion.com/)
+1. [Depop](https://www.depop.com)
 1. [Designspiration](https://www.designspiration.net/)
 1. [DeviantART](https://deviantart.com)
 1. [Discogs](https://www.discogs.com/)
