@@ -95,6 +95,7 @@
 1. [GNOME VCS](https://gitlab.gnome.org/)
 1. [GaiaOnline](https://www.gaiaonline.com/)
 1. [Gam1ng](https://gam1ng.com.br)
+1. [Game-Debate](https://game-debate.com)
 1. [Gamespot](https://www.gamespot.com/)
 1. [Genius (Artists)](https://genius.com/)
 1. [Genius (Users)](https://genius.com/)
