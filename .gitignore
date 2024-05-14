@@ -39,3 +39,6 @@ tests/.excluded_sites
 
 # Vim swap files
 *.swp
+
+# JS Files
+node_modules
