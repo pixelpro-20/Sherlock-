@@ -594,22 +594,6 @@ def main():
         help="If using single username, the output of the result will be saved to this file.",
     )
     parser.add_argument(
-        "--tor",
-        "-t",
-        action="store_true",
-        dest="tor",
-        default=False,
-        help="Make requests over Tor; increases runtime; requires Tor to be installed and in system path.",
-    )
-    parser.add_argument(
-        "--unique-tor",
-        "-u",
-        action="store_true",
-        dest="unique_tor",
-        default=False,
-        help="Make requests over Tor with new Tor circuit after each request; increases runtime; requires Tor to be installed and in system path.",
-    )
-    parser.add_argument(
         "--csv",
         action="store_true",
         dest="csv",
